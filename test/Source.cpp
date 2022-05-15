@@ -1,7 +1,7 @@
 #include "conio.h"
 #include<stdio.h>
 #include <intrin.h>
-extern "C" { //indicate that we have an external function
+extern "C" {
 	int move_array_1byte(int* var, int* varr, int arraysize);
 	int move_array_2byte(int* var, int* varr, int arraysize);
 	int move_array_4byte(int* var, int* varr, int arraysize);
@@ -12,7 +12,6 @@ extern "C" { //indicate that we have an external function
 int main(int argc, char* argv[])
 {
 	#define arraysize 200
-	//__declspec(align(8))
 	__declspec(align(16))
 	int array1[arraysize];
 	int array2[arraysize];
@@ -62,15 +61,9 @@ int main(int argc, char* argv[])
 	printf("\nCode executed in %I64d CPU cycles\n", final_counter - initial_counter);
 
 	
-
-	
 	int array4[arraysize];
 	initial_counter = __rdtsc();
 	move_array_16byte(array1, array4, (arraysize * 4));
 	final_counter = __rdtsc();
-	printf("\nCode executed in %I64d CPU cycles\n", final_counter - initial_counter);
-
-
-
-	
+	printf("\nCode executed in %I64d CPU cycles\n", final_counter - initial_counter);	
 }
